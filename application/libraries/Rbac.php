@@ -49,7 +49,8 @@ class Rbac
 	}
 
 	protected function load_user_role() {
-		$sql = "select id,name,action from {$this->_role_table} where id=" . (int)$this->role;
+		$sql = "SELECT id,name,action FROM {$this->_role_table} "
+		     . "WHERE id=" . (int)$this->role ." OR name='?'"; // '?' is special guest role
 
 		if ($query = $this->_ci->db->query($sql)) {
 			$this->_roles = (array)$query->result_object();
