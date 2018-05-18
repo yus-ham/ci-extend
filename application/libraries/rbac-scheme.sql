@@ -31,4 +31,8 @@ INSERT INTO `rbac_user_role` (`id`, `name`, `description`, `action`) VALUES
 (2,	'?', 'Guest/Not logged in user\r\n', '1,2,3'),
 (3,	'Other Role', '', '1,2,3,4,5,6');
 
+
+-- Add new field if not exist
+-- ALTER TABLE `user` ADD `role` int NULL;
+
 -- 2018-05-14 09:04:50
