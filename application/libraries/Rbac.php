@@ -1,11 +1,8 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
-
 /**
- * @package     CodeIgniter
- * @category    Libraries
- * @author      Yusup Hambali <supalpuket@gmail.com>
+ * This file is part of CI Extend (https://github.com/suphm/ci-extend)
  */
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * CodeIgniter RBAC Class.
@@ -50,7 +47,7 @@ class Rbac
 
 	protected function load_user_role() {
 		$sql = "SELECT id,name,action FROM {$this->_role_table} "
-		     . "WHERE id=" . (int)$this->role ." OR name='?'"; // '?' is special guest role
+		. "WHERE id=" . (int)$this->role . " OR name='?'"; // '?' is special guest role
 
 		if ($query = $this->_ci->db->query($sql)) {
 			$this->_roles = (array)$query->result_object();

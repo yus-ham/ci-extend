@@ -1,12 +1,16 @@
 <?php
+/**
+ * This file is part of CI Extend (https://github.com/suphm/ci-extend)
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * @TODO: Implement https://github.com/php-fig/fig-standards/pull/834#issuecomment-308317798
- * 
  * This class allow to register hook like CI hooks.
  * The difference is the hooks can be registered anywhere.
  * The signature of function to hooked may defined with additional $data parameter as an array.
  * If hook returns false the rest registered hooks will not be called
+ * 
+ * @todo: Implement https://github.com/php-fig/fig-standards/pull/834#issuecomment-308317798
  */
 class MY_Hooks extends CI_Hooks
 {
@@ -108,7 +112,7 @@ class MY_Hooks extends CI_Hooks
 		if (!isset($hook['function'])) {
 			return;
 		}
-		
+
 		if (isset($hook['filename']) && file_exists($hook['filename'])) {
 			require_once $hook['filename'];
 		}

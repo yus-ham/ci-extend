@@ -1,3 +1,4 @@
+-- This file is part of CI Extend (https://github.com/suphm/ci-extend)
 -- Adminer 4.6.2 MySQL dump
 
 CREATE TABLE `rbac_user_action` (
@@ -32,7 +33,7 @@ INSERT INTO `rbac_user_role` (`id`, `name`, `description`, `action`) VALUES
 (3,	'Other Role', '', '1,2,3,4,5,6');
 
 
--- Add new field if not exist
+-- Add new field to user table if not exist
 -- ALTER TABLE `user` ADD `role` int NULL;
 
 -- 2018-05-14 09:04:50
