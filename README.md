@@ -8,7 +8,7 @@ Compatible with CodeIgniter 3.x
 - 'post_loader_init' This hook point called after call to CI_Loader constructor.
 
 ## Customized Hooks
-You can register or remove hook without adding in ```hooks.php``` file.
+You can register or remove hook without ```hooks.php``` file.
 ~~~php
 // Prepends new hook to 'post_controller' hook point
 $CI->hooks->prepend('post_controller', function() {
@@ -19,7 +19,7 @@ $CI->hooks->prepend('post_controller', function() {
 $CI->hooks->append(
 	'post_user_register', // you can also add new hook point too
 	function($data) { // new parameter $data will provided by call_hook()
-		send_register_nortification();
+		send_register_notification();
 
 		// All hook point can have multiple hook. These all hooks will called.
 		// but you may stop next hook call by return false.
@@ -55,6 +55,7 @@ $hook['post_controller_constructor'][] = function() {
 };
 ~~~
 The ```user_can()``` function provided to test whether user can do spesified permission or user has a role.
+Argument accepted in following forms. 
 ~~~php
 user_can('controller/method');	// user can run a method in controller.
 user_can('controller/*');		// all methods in controller
