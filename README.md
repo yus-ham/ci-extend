@@ -43,7 +43,8 @@ This librariy requires database migration. Follow this steps to setup RBAC.
 - Add new tables on your database first.
 You may just import the provided SQL file ```rbac-scheme.sql```.
 - Add new field ```role``` with type ```int``` to your ```user``` table if not exist.
-You can run this sql command ```ALTER TABLE `user` ADD `role` int NULL;```
+You can run this sql command
+```ALTER TABLE `user` ADD `role` int NULL;```
 - Add new ```post_controller_constructor``` hook
 Copy this code and paste to your ```hook.php```
 ~~~php
