@@ -100,31 +100,35 @@ class MY_Hooks extends CI_Hooks
 	 * - hook point must registered
 	 * - hook point not in progress
 	 * This function overrides parent implementation.
-	 * Not like CI's hook, You can pass an array or object as second argument.
-	 * It will converted to an object and then passed to hook which may alter that OBJECT then.
-	 * This function can returns boolean value if an empty $data passed. The value is FALSE when last executed hook return FALSE otherwise it is TRUE.
-	 * and also can returns an array contain two items.
-	 * first item with key 'data' which it is $data which may be altered by hook.
+	 * Not like CI's hook, You can pass an ARRAY it will converted to OBJECT later, or an OBJECT as second argument
+	 * and then passed to hook which may alter that object.
+	 * This function returns boolean value if an empty $data passed.
+	 * The value is FALSE when last executed hook return FALSE otherwise it is TRUE.
+	 * and also can returns an ARRAY contain two items.
+	 * first item with key 'data', it is $data that converted to OBJECT and maybe altered by hook.
 	 * another item is boolean value with key 'stopped'. The value is TRUE when last executed hook return FALSE otherwise it is FALSE.
 	 *
-	 * @param	string	$name	Hook point name
-	 * @param   mixed	$data	data to be passed to hook
+	 * @param	string			$name	Hook point name
+	 * @param   array|object	$data	data to be passed to hook
 	 * @return void|boolean|array
 	 */
 	public function call_hook($name = '', $data = null) {
-		log_message('debug', PHP_EOL . '======= Run hook: ' . $name . ' =======');
-		$result['stopped'] = false;
+		log_message('debug', "\n======= Run hook: $name =======");
+		is_array($data) && $data && $data = (object)$data;
+
+		$result = array(
+			'stopped' => false,
+			'data' => $data
+		);
 
 		switch(true) {
 			case!$this->enabled:
 			case!isset($this->_hooks[$name]):
 			case $this->_in_progress[$name]:
-				return;
+				return $result;
 		}
 
-		is_array($data) && $data = (object)$data;
 		$this->_in_progress[$name] = true;
-
 		foreach ($this->_hooks[$name] as $hook) {
 			if (false === $this->_run_hook($hook, $data)) {
 				$result['stopped'] = true;
