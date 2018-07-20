@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *		$email_body = 'some contents';
  *		$this->send_email($from, $data->user_email, $email_body);
  * });
- * 
+ *
  * # call hooks at where after user registration
  * $CI->hooks->call_hook('post_register');
  * ~~~
@@ -38,7 +38,7 @@ class MY_Hooks extends CI_Hooks
 	 * Prepends hook to the hook point.
 	 * The signature of the function to hooked may defined with additional $data parameter.
 	 * And it's argument will be passed by [[call_hook()]] as an OBJECT and the hook may alter that OBJECT then.
-	 * 
+	 *
 	 * @param string	$name	Hook point name
 	 * @param callable	$hook	callable or function name to prepended
 	 * @see call_hook()
@@ -52,7 +52,7 @@ class MY_Hooks extends CI_Hooks
 	 * Appends hook to the hook point.
 	 * The signature of the function to hooked may defined with additional $data parameter.
 	 * And it's argument will be passed by [[call_hook()]] as an OBJECT and the hook may alter that OBJECT then.
-	 * 
+	 *
 	 * @param string	$name	Hook point name
 	 * @param callable	$hook	callable or function name to appended
 	 * @see call_hook()
@@ -72,7 +72,7 @@ class MY_Hooks extends CI_Hooks
 
 	/**
 	 * Remove specified hook from hook point.
-	 * 
+	 *
 	 * @param string	$name	Hook point name
 	 * @param callable	$hook	Hook which to removed
 	 */
@@ -86,7 +86,7 @@ class MY_Hooks extends CI_Hooks
 
 	/**
 	 * Remove hook point
-	 * 
+	 *
 	 * @param string $name Hook point name
 	 */
 	public function remove_point($name) {
@@ -163,10 +163,6 @@ class MY_Hooks extends CI_Hooks
 		/** The rest are just for debugging */
 		if (ENVIRONMENT !== 'development')
 			return;
-
-		$this->prepend('cache_override', function () {
-			log_message('debug', "\n======= URI: " . $_SERVER['REQUEST_METHOD'] . ' /' . load_class('URI', 'core')->uri_string . ' ' . @$_SERVER['HTTP_X_REQUESTED_WITH'] . ' =======');
-		});
 
 		$this->prepend('post_controller_constructor', function () {
 			log_message('debug', PHP_EOL . '======= $_SESSION ' . session_id() . ': ' . print_r($_SESSION, 1));
