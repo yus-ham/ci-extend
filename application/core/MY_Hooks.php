@@ -113,7 +113,7 @@ class MY_Hooks extends CI_Hooks
 	 * @return void|boolean|array
 	 */
 	public function call_hook($name = '', $data = null) {
-		log_message('debug', "\n======= Run hook: $name =======");
+		$this->_pre_call_hook($name);
 		is_array($data) && $data && $data = (object)$data;
 
 		$result = array(
@@ -172,9 +172,17 @@ class MY_Hooks extends CI_Hooks
 			log_message('debug', PHP_EOL . '======= $_SESSION ' . session_id() . ': ' . print_r($_SESSION, 1));
 			log_message('debug', PHP_EOL . '======= $_REQUEST: ' . print_r($_REQUEST, 1));
 		});
+	}
 
-		$this->append('post_controller_constructor', function () {
-			log_message('debug', PHP_EOL . '======= Run action: ' . implode('/', load_class('URI', 'core')->rsegments) . ' =======');
+	protected function _pre_call_hook($name) {
+		log_message('debug', "\n======= Running hook: $name =======");
+
+		/** just for debugging */
+		if (ENVIRONMENT !== 'development')
+			return;
+
+		$name === 'post_controller_constructor' && $this->append('post_controller_constructor', function () {
+			log_message('debug', PHP_EOL . '======= Running action: ' . implode('/', load_class('URI', 'core')->rsegments) . ' =======');
 		});
 	}
 }
